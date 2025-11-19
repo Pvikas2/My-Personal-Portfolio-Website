@@ -70,12 +70,10 @@ const Navbar = () => {
         </button>
       </div>
       <div className='hidden lg:block'>
-        <a href='#contact' className='bg-gradient-to-r from-pink-500 to-blue-500 text-white px-5 py-2 rounded-full font-medium shadow-lg hover:opacity-90 transition-opacity duration-300'>
+        <a href='#contact' className='bg-linear-to-r from-pink-500 to-blue-500 text-white px-5 py-2 rounded-full font-medium shadow-lg hover:opacity-90 transition-opacity duration-300'>
           Reach out
         </a>
       </div>
-
-
       <OverlayMenu isOpen={menuOpen} onClose={() => setMenuOpen(false)}/>
     </nav>
     </>

@@ -1,11 +1,12 @@
 import React, { useMemo, useState } from 'react'
 import { motion } from 'framer-motion'
+import avator from '../assets/avator.png'
 import ParticlesBackground from '../components/ParticlesBackground'
 import { FaGithub, FaLinkedin, FaXTwitter } from 'react-icons/fa6'
 const social = [
   {Icon: FaXTwitter, label: 'X', href: 'https://twitter.com/Pvikas111' },
-  {Icon: FaLinkedin, label: 'X', href: 'https://www.linkedin.com/in/vikas-pimpale-b27b38129/' },
-  {Icon: FaGithub, label: 'X', href: 'https://github.com/Pvikas2' },
+  {Icon: FaLinkedin, label: 'LinkedIn', href: 'https://www.linkedin.com/in/vikas-pimpale-b27b38129/' },
+  {Icon: FaGithub, label: 'GitHub', href: 'https://github.com/Pvikas2' },
 ]
 
 const glowVariants = {
@@ -44,15 +45,15 @@ const Home = () => {
   return (
     <section id="home" className='w-full h-screen relative bg-black overflow-hidden'>
       <ParticlesBackground/>
-      <div className='absolute insert-0'>
-        <div className='absolute -top-32 -left-32 w-[70vw] sm:w-[z-50vw] md:w-[40vw] h-[70vw] sm:h-[z-50vw] md:h-[40vw]
+      <div className='absolute inset-0'>
+        <div className='absolute -top-32 -left-32 w-[70vw] sm:w-[50vw] md:w-[40vw] h-[70vw] sm:h-[z-50vw] md:h-[40vw]
         max-w-[500px] max-h-[500px] rounded-full bg-linear-to-r from-[#302b63] via-[#00bf8f] to-[#1cd8d2]
         opacity-30 sm:opacity-20 md:opacity-10 blur-[100px] sm:blur-[130px] md:blur-[150px] animate-pulse'></div>
-        <div className='absolute left-[1180px] top-[350px] w-[70vw] sm:w-[z-50vw] md:w-[40vw] h-[70vw] sm:h-[z-50vw] md:h-[40vw]
+        <div className='absolute left-[1180px] top-[350px] w-[70vw] sm:w-[50vw] md:w-[40vw] h-[70vw] sm:h-[z-50vw] md:h-[40vw]
         max-w-[500px] max-h-[500px] rounded-full bg-linear-to-r from-[#302b63] via-[#00bf8f] to-[#1cd8d2]
         opacity-30 sm:opacity-20 md:opacity-10 blur-[100px] sm:blur-[130px] md:blur-[150px] animate-pulse'></div>
       </div>
-      <div className='relative z-10 h-full w-full max-w-7xl mx-auto px-4 grid gridcols-1 lg:grid-cols-2'>
+      <div className='relative z-10 h-full w-full max-w-7xl mx-auto px-4 grid grid-cols-1 lg:grid-cols-2'>
         <div className='flex flex-col justify-center text-center lg:text-left relative'>
           <div className='w-full lg:pr-24 mx-auto max-w-3xl'>
             <motion.div
@@ -74,9 +75,9 @@ const Home = () => {
             animate={{opacity: 1, y:0}}
             transition={{duration: 1}}
             >
-              Hello I'm
+              Hello, I'm
               <br/>
-              <span className='text-white font-bold text-5xl sm:text-6xl md:text-7xl lg:8xl lg:whitespace-nowrap'>
+              <span className='text-white font-bold text-5xl sm:text-6xl md:text-7xl lg:text-8xl lg:whitespace-nowrap'>
                 Vikas Pimpale
               </span>
             </motion.h1>
@@ -110,7 +111,7 @@ const Home = () => {
                 My Resume
               </a>
             </motion.div>
-            <div className='mt-10 flex gap-5 text-2xl md:text-3xl justify-center md:justify-start'>
+            <div className='mt-10 flex gap-5 text-2xl md:text-3xl justify-center lg:justify-start'>
               {social.map(({Icon, label, href}) => (
                 <motion.a 
                   href={href}
@@ -131,8 +132,21 @@ const Home = () => {
 
           </div>
         </div>
-        <div>
+        <div className='relative hidden lg:block'>
+          <div className='absolute top-0.5 -translate-y-0.5 pointer-events-none'
+          style={{ right: "10px", width: "min(22vw, 410px)", height: "min(40vw, 60px)", borderRadius:"50%", 
+            filter: "blur(38px)", opacity: 0.32, background: "conic-gradient(from 0deg, #1cd8d2, #00bf8f, #302b63, #1cd8d2)"
+          }}/>
+          <motion.img 
+            src={avator}
+            className='absolute top-1/2 -translate-y-1/2 object-contain select-none pointer-events-none'
+            style={{right: "-30px", width:"min(45vw, 780px)", maxHeight: "90vh"}}
+            initial={{opacity:0, y:40, scale:0.98}}
+            animate={{opacity:1, y:0, scale:1}}
+            transition={{delay: 0.2, duration: 0.8}}
+          >
 
+          </motion.img>
         </div>
 
       </div>

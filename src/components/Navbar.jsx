@@ -1,8 +1,91 @@
+// import React, { useEffect, useRef, useState } from 'react'
+// import OverlayMenu from './OverlayMenu'
+// import Logo from '../assets/Logo.PNG'
+// import { TfiMenuAlt } from "react-icons/tfi";
+
+
+// const Navbar = () => {
+//   const [menuOpen, setMenuOpen] = useState(false)
+//   const [visible, setVisible] = useState(true)
+//   const [forceVisible, setForceVisible] = useState(false)
+//   const lastScrollY = useRef(0);
+//   const timerId = useRef(null)
+  
+//   useEffect(() => {
+//     const homeSection = document.querySelector("#home");
+//     const observer = new IntersectionObserver(([entry]) => {
+//       if(entry.isIntersecting){
+//         setForceVisible(true)
+//         setVisible(true);
+//       }
+//       else setForceVisible(false);
+//     }, {threshold: 0.1})
+
+//     if(homeSection) observer.observe(homeSection)
+//     return () => {
+//       if(homeSection) observer.unobserve(homeSection)
+//     }  
+//   },[])
+
+
+//   useEffect(() => {
+//     const handleScroll = () => {
+//       if(forceVisible){
+//         setVisible(true);
+//         return
+//       }
+//     }
+//     const currentScrollY = window.scrollY;
+//     if(currentScrollY > lastScrollY.current){
+//       setVisible(false);
+//     }
+//     else {
+//       setVisible(true );
+//       if(timerId.current) clearTimeout(timerId.current);
+//       timerId.current = setTimeout(() => {
+//         setVisible(false);
+//       }, 3000)
+//       lastScrollY.current = currentScrollY;
+//     }
+//     window.addEventListener('scroll', handleScroll, {passive: true})
+//     return () => {
+//       window.removeEventListener('scroll', handleScroll)
+//       if(timerId.current) clearTimeout(timerId.current)
+//     }
+//   }, [forceVisible])
+  
+//   return (
+//     <>
+//     <nav className={`fixed top-0 left-0 w-full flex items-center justify-between px-6 py-4 z-50 transition-transform duration-300 ${visible ? "translate-y-0": "translate-y-0"}`}>
+//       <div className='flex items-center space-x-2'>
+//         <img src={Logo} className='w-8 h-8' /> 
+//         <div className='text-2xl font-bold text-white hidden sm:block'>Vikas</div>
+//       </div>
+//       <div className='block lg:absolute lg:left-1/2 lg:transform lg:-translate-x-1/2'>
+//         <button 
+//           className='text-white text-3xl focus:outline-none'
+//           onClick={() => setMenuOpen(true)}
+//         >
+//           <TfiMenuAlt />
+//         </button>
+//       </div>
+//       <div className='hidden lg:block'>
+//         <a href='#contact' className='bg-linear-to-r from-pink-500 to-blue-500 text-white px-5 py-2 rounded-full font-medium shadow-lg hover:opacity-90 transition-opacity duration-300'>
+//           Reach out
+//         </a>
+//       </div>
+//       <OverlayMenu isOpen={menuOpen} onClose={() => setMenuOpen(false)}/>
+//     </nav>
+//     </>
+//   )
+// }
+
+// export default Navbar
+
 import React, { useEffect, useRef, useState } from 'react'
 import OverlayMenu from './OverlayMenu'
 import Logo from '../assets/Logo.PNG'
 import { TfiMenuAlt } from "react-icons/tfi";
-
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false)
@@ -11,6 +94,7 @@ const Navbar = () => {
   const lastScrollY = useRef(0);
   const timerId = useRef(null)
   
+  // Scroll hide/show logic (unchanged)
   useEffect(() => {
     const homeSection = document.querySelector("#home");
     const observer = new IntersectionObserver(([entry]) => {
@@ -22,11 +106,8 @@ const Navbar = () => {
     }, {threshold: 0.1})
 
     if(homeSection) observer.observe(homeSection)
-    return () => {
-      if(homeSection) observer.unobserve(homeSection)
-    }  
+    return () => homeSection && observer.unobserve(homeSection)
   },[])
-
 
   useEffect(() => {
     const handleScroll = () => {
@@ -38,44 +119,71 @@ const Navbar = () => {
     const currentScrollY = window.scrollY;
     if(currentScrollY > lastScrollY.current){
       setVisible(false);
-    }
-    else {
-      setVisible(true );
+    } else {
+      setVisible(true);
       if(timerId.current) clearTimeout(timerId.current);
-      timerId.current = setTimeout(() => {
-        setVisible(false);
-      }, 3000)
-      lastScrollY.current = currentScrollY;
+      timerId.current = setTimeout(() => setVisible(false), 3000);
     }
+    lastScrollY.current = currentScrollY;
+
     window.addEventListener('scroll', handleScroll, {passive: true})
     return () => {
       window.removeEventListener('scroll', handleScroll)
-      if(timerId.current) clearTimeout(timerId.current)
+      clearTimeout(timerId.current)
     }
   }, [forceVisible])
-  
+
+  const navItems = [
+    "Home",
+    "About",
+    "Skills",
+    "Projects",
+    "Experience",
+    "Contact"
+  ];
+
   return (
     <>
-    <nav className={`fixed top-0 left-0 w-full flex items-center justify-between px-6 py-4 z-50 transition-transform duration-300 ${visible ? "translate-y-0": "translate-y-0"}`}>
-      <div className='flex items-center space-x-2'>
-        <img src={Logo} className='w-8 h-8' /> 
-        <div className='text-2xl font-bold text-white hidden sm:block'>Vikas</div>
-      </div>
-      <div className='block lg:absolute lg:left-1/2 lg:transform lg:-translate-x-1/2'>
-        <button 
-          className='text-white text-3xl focus:outline-none'
-          onClick={() => setMenuOpen(true)}
-        >
-          <TfiMenuAlt />
-        </button>
-      </div>
-      <div className='hidden lg:block'>
-        <a href='#contact' className='bg-linear-to-r from-pink-500 to-blue-500 text-white px-5 py-2 rounded-full font-medium shadow-lg hover:opacity-90 transition-opacity duration-300'>
-          Reach out
-        </a>
-      </div>
-      <OverlayMenu isOpen={menuOpen} onClose={() => setMenuOpen(false)}/>
-    </nav>
+      <nav className={`fixed top-0 left-0 w-full flex items-center justify-between px-6 py-4 z-50 transition-transform duration-300 ${visible ? "translate-y-0": "translate-y-0"}`}>
+        
+        {/* Logo Section */}
+        <div className='flex items-center space-x-2'>
+          <img src={Logo} className='w-8 h-8' /> 
+          <div className='text-2xl font-bold text-white hidden sm:block'>Vikas</div>
+        </div>
+
+        {/* Desktop Nav Items */}
+        <ul className='hidden lg:flex space-x-10 text-white text-lg font-semibold'>
+          {navItems.map(item => (
+            <li key={item}>
+              <a className='hover:text-pink-400 transition-colors' href={`#${item.toLowerCase()}`}>
+                {item}
+              </a>
+            </li>
+          ))}
+        </ul>
+
+        {/* Contact button (desktop) */}
+        <div className='hidden lg:block'>
+          <a href='#contact' className='bg-linear-to-r from-pink-500 to-blue-500 text-white px-5 py-2 rounded-full font-medium shadow-lg hover:opacity-90 transition-opacity duration-300'>
+            Reach Out
+          </a>
+        </div>
+
+        {/* Mobile Menu Icon */}
+        <div className='block lg:hidden'>
+          <button 
+            className='text-white text-3xl focus:outline-none'
+            onClick={() => setMenuOpen(true)}
+          >
+            <TfiMenuAlt />
+          </button>
+        </div>
+
+        {/* Mobile Only Overlay Menu */}
+        <OverlayMenu isOpen={menuOpen} onClose={() => setMenuOpen(false)} />
+      
+      </nav>
     </>
   )
 }

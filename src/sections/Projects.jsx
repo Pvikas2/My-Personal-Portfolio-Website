@@ -70,7 +70,7 @@ const Projects = () => {
 
   return (
     <section 
-      id="#projects" 
+      id="projects" 
       ref={sceneRef} 
       className='text-white relative'
       style={{backgroundColor: activeProject.bgColor, transition: "background-color 400ms ease", height: `${100*projects.length}vh`}}

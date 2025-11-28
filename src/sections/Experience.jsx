@@ -6,21 +6,25 @@ const experiences = [
     role: "HVAC Design Engineer",
     company: "A K Enterprises",
     duration: "2019-2021",
-    description: "Designed and engineered HVAC systems for residential and commercial projects following ASHRAE standards. Achieved 25% energy reduction in a commercial project and LEED Platinum certification with 40% emission reduction. Tools: AutoCAD, MS Excel, Heat Load Calculation Sheets.",
+    description:
+      "Designed HVAC systems using ASHRAE standards, delivered energy-efficient projects, and used AutoCAD and heat-load tools.",
   },
   {
-    role: "SDE-I Full stack developer",
+    role: "SDE-I Full Stack Developer",
     company: "eKincare",
     duration: "2021 - 2023",
-    description: "Ekincare is a B2B/B2C health tech platform providing health benefits and analytics for corporate clients. Built features like Employee List, Mental Wellness, Stepathons, Analytics Revamp, and Spending Account. Implemented multi-factor authentication, manager search functionality, and company policy management. Developed landing pages and validation checklists for employee claim reimbursement. Resolved UI issues to enhance responsiveness and user experience across mobile and web platforms.",
+    description:
+      "Built core platform features, implemented MFA and policy tools, improved claims flows, and fixed UI/UX issues across web and mobile.",
   },
   {
-    role: "Software Enginner II",
-    company: "TrcaceLink",
+    role: "Software Engineer II",
+    company: "TraceLink",
     duration: "2023 - 2025",
-    description: "At TraceLink, I developed and maintained the Gen2 Opus-UI using Web Components, Lit, and Shoelace to improve responsiveness, performance, and accessibility. I delivered end-to-end supply chain features on a meta-driven architecture and built real-time updates using WebSockets over GraphQL. I created reusable UI components like a rich text editor, media uploader, and currency input with full localization support. I also implemented cross-window communication with postMessage, managed AWS deployments (S3, Jenkins, CI/CD), and collaborated with teams to build modular, scalable UI components using React, Tailwind, and HTML5.",
+    description:
+      "Built Gen2 Opus-UI with Web Components and Lit, created reusable components, added real-time updates, and worked on AWS + CI/CD.",
   },
 ];
+
 
 function ExperienceItem ({exp, idx, start, end, scrollYProgress, layout }){
   const scale = useTransform(scrollYProgress, [start, end], [0, 1]);
@@ -78,8 +82,6 @@ function ExperienceItem ({exp, idx, start, end, scrollYProgress, layout }){
   )
 
 }
-
-
 
 const Experience = () => {
   const sceneRef = useRef(null);
@@ -141,14 +143,14 @@ const Experience = () => {
 
               {isMobile && (
                 <div className='relative w-full max-w-md'>
-                  <div className='absolute left-0 top-0 botton-0 w-0.5 bg-white/15 rounded'>
+                  <div className='absolute left-0 top-0 bottom-0 w-0.5 bg-white/15 rounded'>
                     <motion.div 
                       className='absolute left-0 top-0 w-1.5 bg-white rounded origin-top'
-                      style={{width: lineSize}}
+                      style={{height: lineSize}}
                     >
-                    </motion.div>              
+                    </motion.div>  
                   </div>
-                  <div className='relative flex flex-col gap-10 ml-10 mt-6 pb-28'>
+                  <div className='relative flex flex-col gap-10 ml-10 h-full mt-6 pb-28'>
                     {experiences.map((exp, idx) => (
                       <ExperienceItem 
                         key={idx}

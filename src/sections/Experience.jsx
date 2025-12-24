@@ -69,7 +69,7 @@ function ExperienceItem ({exp, idx, start, end, scrollYProgress, layout }){
         <h3 className='text-lg font-semibold wrap-break-word'>
           {exp.role}
         </h3>
-        <p classNsme='text-lg font-semibold break-words'>
+        <p className='text-lg font-semibold break-words'>
           {exp.company} || {exp.duration} 
         </p>
         <p 

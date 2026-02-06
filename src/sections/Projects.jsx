@@ -1,7 +1,9 @@
 import { title } from 'framer-motion/client';
 import React, { useMemo } from 'react'
-import img1 from '../assets/img1.JPG'
-import img2 from '../assets/img2.JPG'
+// import img1 from '../assets/img1.JPG'
+// import img2 from '../assets/img2.JPG'
+import image1 from '../assets/image1.png'
+import image2 from '../assets/image2.png'
 import img3 from '../assets/img3.JPG'
 import photo1 from '../assets/photo1.JPG'
 import photo2 from '../assets/photo2.PNG'
@@ -32,16 +34,16 @@ const Projects = () => {
 
   const projects = useMemo(() => [
       {
-        title: "nk studio",
-        link: "https://www.nk.studio/",
-        bgColor: "#0d4d3d",
-        image: isMobile ? photo1 : img1, // use mobile or desktop image
+        title: "HireFlow",
+        link: "https://hireflow-job-portal.netlify.app/",
+        bgColor: "linear-gradient(135deg, rgb(79, 70, 229), rgb(99, 102, 241))",
+        image: isMobile ? photo1 : image1, // use mobile or desktop image
       },
       {
-        title: "Gamily",
-        link: "https://gamilyapp.com/",
-        bgColor: "#3884d3",
-        image: isMobile ? photo2 : img2,
+        title: "E-shop",
+        link: "https://my-ecommerce-shop-website.netlify.app/",
+        bgColor: "linear-gradient(45deg, #0ff, #2c5364)",
+        image: isMobile ? photo2 : image2,
       },
       {
         title: "Hungry Tiger",
@@ -73,7 +75,7 @@ const Projects = () => {
       id="projects" 
       ref={sceneRef} 
       className='text-white relative'
-      style={{backgroundColor: activeProject.bgColor, transition: "background-color 400ms ease", height: `${100*projects.length}vh`}}
+      style={{background: activeProject.bgColor, transition: "background-color 400ms ease", height: `${100*projects.length}vh`}}
     >
       <div className='sticky top-0 h-screen flex flex-col items-center justify-center'>
         <h2 className={`text-3xl font-semibold z-10 text-center ${ isMobile ? 'mt-4' : 'mt-8' }`}>
@@ -118,9 +120,6 @@ const Projects = () => {
                   }}
                   loading='lazy'
                 />
-                <div className="pointer-events-none absolute inset-0"
-                  style={{zIndex: 11, background: "linear-gradient(180deg, rgba(0,0,0,0.12) 0%, rgba(0,0,0,0) 40%)"}}>
-                </div>
               </div>
 
             </div>
